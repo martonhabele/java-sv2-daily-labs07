@@ -7,12 +7,16 @@ class HumanTest {
 
     @Test
     void testNameIsInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> new Human(null, 1980));
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,
+                () -> new Human(null, 1980));
+        assertEquals("Name invalid!", iae.getMessage());
     }
 
     @Test
     void testYoBIsInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> new Human("Géza", 1750));
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,
+                () -> new Human("Géza", 1750));
+        assertEquals("Cannot be older than 120!", iae.getMessage());
     }
 
     @Test
