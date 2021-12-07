@@ -2,7 +2,10 @@ package day05;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -13,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StoreTest {
     Store store = new Store();
+
+    @TempDir
     File tempFolder;
 
     @BeforeEach
@@ -23,9 +28,10 @@ class StoreTest {
     }
 
     @Test
-    void testWriteFile() {
+    void testWriteFile() throws IOException {
         Path path = tempFolder.toPath().resolve("test.txt");
-        Path resultPath = store.saveToFileByMonth(Month.JUNE);
-        List<String>
+        Path resultPath = store.saveToFileByMonth(Month.OCTOBER, path);
+        List<String> result = Files.readAllLines(path);
+        assertEquals("Scewdriver", result.get(0).split(";")[0]);
     }
 }

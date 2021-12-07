@@ -18,13 +18,13 @@ public class Store {
         soldProducts.add(product);
     }
 
-    public Path saveToFileByMonth(Month month) {
+    public Path saveToFileByMonth(Month month, Path testPath) {
         List<String> result = stringListByMonth(month);
         try {
             StringBuilder sb = new StringBuilder().append("soldProducts").append(month.name())
                     .append(".csv");
             Path path = Path.of(sb.toString());
-            Files.write(path, result);
+            Files.write(testPath, result);
             return path;
         } catch (IOException e) {
             throw new IllegalArgumentException("Cannot write file!", e);
